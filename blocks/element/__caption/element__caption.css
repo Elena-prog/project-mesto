@@ -4,6 +4,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
     align-items: baseline;
     padding: 25px 20px;
     box-sizing: border-box;

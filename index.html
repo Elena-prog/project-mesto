@@ -13,29 +13,16 @@
             <img src="./images/logo.svg" alt="логотип Место." class="logo header__logo"/>
          </header>
          <main class="content">
-            <div class="popup">
-                <form action="#" class="popup__container">
-                    <button type="button" class="popup__close-button">
-                        <img src="./images/close-icon.svg" alt="кнопка закрыть." class="popup__close-icon">
-                    </button>
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" class="popup__input popup__input_type_name">
-                    <input type="text" class="popup__input popup__input_type_description">
-                    <button type="submit" class="popup__submit-button">Сохранить</button>
-                </form>
-            </div>
             <section class="profile">
                 <img src="./images/сousteau.jpg" alt="Жак Ив Кусто" class="profile__avatar"/>
                 <div class="profile__info">
                     <div class="profile__container">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="edit-button">
-                            <img src="./images/edit-button.svg" alt="кнопка редактирования." class="edit-button__icon"/>
-                        </button>
+                        <button class="edit-button" aria-label="кнопка редактирования."></button>
                     </div>
                     <p class="profile__description">Исследователь океана</p>
                 </div>
-                <button class="add-button"></button>
+                <button class="add-button" aria-label="кнопка добавить."></button>
             </section>
             <section class="elements">
                 <ul class="elements__group">
@@ -45,10 +32,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Карачаевск</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                     <li class="element">
@@ -57,10 +41,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Гора Эльбрус</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                     <li class="element">
@@ -69,10 +50,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Домбай</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                     <li class="element">
@@ -81,10 +59,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Долина гейзеров</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                     <li class="element">
@@ -93,10 +68,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Ленские столбы</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                     <li class="element">
@@ -105,10 +77,7 @@
                         </div>
                         <div class="element__caption">
                             <h2 class="element__title">Гора Белуха</h2>
-                            <button class="heart">
-                                <img src="./images/heart.svg" alt="кнопка сердце неактивное." class="heart__icon heart__icon_desibled"/>
-                                <img src="./images/heart-active.svg" alt="кнопка сердце активное." class="heart__icon heart__icon_active"/>
-                            </button>
+                            <button class="heart" aria-label="кнопка неактивное сердце."></button>
                         </div>
                     </li>
                 </ul>
@@ -117,6 +86,15 @@
          <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
          </footer>
+         <div class="popup">
+            <form action="#" class="popup__container">
+                <button type="button" class="popup__close-button" aria-label="кнопка закрыть."></button>
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <input type="text" class="popup__input popup__input_type_name" required placeholder="Имя">
+                <input type="text" class="popup__input popup__input_type_description" required placeholder="Род деятельности">
+                <button type="submit" class="popup__submit-button">Сохранить</button>
+            </form>
+        </div>
      </div>
      <script src="./scripts/index.js"></script>
 </body>

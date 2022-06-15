@@ -1,3 +1,3 @@
 .heart_active {
-    display: none;
+    background-image: url(../../../images/heart-active.svg);
 }
