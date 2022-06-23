@@ -12,6 +12,10 @@ function editProfile () {
     inputDescription.value = description.textContent;
 }
 
+function close () {
+    popup.classList.remove('popup_opened');
+}
+
 function formSubmitHandler (evt) {
     evt.preventDefault();
     name.textContent = inputName.value;
@@ -19,13 +23,36 @@ function formSubmitHandler (evt) {
     close();
 }
 
-function close () {
-    popup.classList.remove('popup_opened');
-}
-
 editButton.addEventListener('click', editProfile);
 
 popup.addEventListener('submit', formSubmitHandler);
 
 closePopup.addEventListener('click', close);
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
 
