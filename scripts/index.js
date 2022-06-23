@@ -1,19 +1,3 @@
-const editButton = document.querySelector('.edit-button'),
-    popupEdit = document.querySelector('.popup_type_edit'),
-    formEdit = document.querySelector('.popup__container_type_edit'),
-    closePopupEdit = document.querySelector('.popup__close-button_type_edit'),
-    name = document.querySelector('.profile__name'),
-    description = document.querySelector('.profile__description'),
-    inputName = document.querySelector('.popup__input_type_name'),
-    inputDescription = document.querySelector('.popup__input_type_description'),
-    cardsContainer = document.querySelector('.elements__group'),
-    addButton = document.querySelector('.add-button'),
-    popupAdd = document.querySelector('.popup_type_add'),
-    closePopupAdd = document.querySelector('.popup__close-button_type_add'),
-    inputTitle = document.querySelector('.popup__input_type_title'),
-    inputLink = document.querySelector('.popup__input_type_link'),
-    formAdd = document.querySelector('.popup__container_type_add');
-
 const initialCards = [
     {
         name: 'Архыз',
@@ -41,18 +25,34 @@ const initialCards = [
     }
 ];
 
+const editButton = document.querySelector('.edit-button'),
+    popupEdit = document.querySelector('.popup_type_edit'),
+    formEdit = document.querySelector('.popup__container_type_edit'),
+    closePopupEdit = document.querySelector('.popup__close-button_type_edit'),
+    name = document.querySelector('.profile__name'),
+    description = document.querySelector('.profile__description'),
+    inputName = document.querySelector('.popup__input_type_name'),
+    inputDescription = document.querySelector('.popup__input_type_description'),
+    cardsContainer = document.querySelector('.elements__group'),
+    addButton = document.querySelector('.add-button'),
+    popupAdd = document.querySelector('.popup_type_add'),
+    closePopupAdd = document.querySelector('.popup__close-button_type_add'),
+    inputTitle = document.querySelector('.popup__input_type_title'),
+    inputLink = document.querySelector('.popup__input_type_link'),
+    formAdd = document.querySelector('.popup__container_type_add');
+
 
 initialCards.forEach(function(item){
     const cardTemplate = document.querySelector('#card-template').content,
         card = cardTemplate.querySelector('.element').cloneNode(true),
         cardName = card.querySelector('.element__title'),
-        cardImage = card.querySelector('.element__image');
+        cardImage = card.querySelector('.element__image'),
+        likeButton = card.querySelector('.heart');
 
     cardName.textContent = item.name;
     cardImage.setAttribute('src', item.link);
-    
-
     cardsContainer.append(card);
+    likeButton.addEventListener('click', like);
 })
 
 function openPopupEdit () {
@@ -74,6 +74,8 @@ function formEditSubmitHandler (evt) {
 
 function openPopupAdd () {
     popupAdd.classList.add('popup_opened');
+    inputTitle.value = '';
+    inputLink.value = '';
 }
 
 function closeAdd () {
@@ -85,15 +87,19 @@ function formAddSubmitHandler (evt) {
     const cardTemplate = document.querySelector('#card-template').content,
         card = cardTemplate.querySelector('.element').cloneNode(true),
         cardName = card.querySelector('.element__title'),
-        cardImage = card.querySelector('.element__image');
+        cardImage = card.querySelector('.element__image'),
+        likeButton = card.querySelector('.heart');
 
     cardName.textContent = inputTitle.value;
     cardImage.setAttribute('src', inputLink.value);
     cardsContainer.prepend(card);
     closeAdd();
+    likeButton.addEventListener('click', like);
 }
 
-
+function like (evt) {
+    evt.target.classList.toggle('heart_active');
+}
 
 editButton.addEventListener('click', openPopupEdit);
 
