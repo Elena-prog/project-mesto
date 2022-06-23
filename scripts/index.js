@@ -1,5 +1,6 @@
 const editButton = document.querySelector('.edit-button'),
     popupEdit = document.querySelector('.popup_type_edit'),
+    formEdit = document.querySelector('.popup__container_type_edit'),
     closePopupEdit = document.querySelector('.popup__close-button_type_edit'),
     name = document.querySelector('.profile__name'),
     description = document.querySelector('.profile__description'),
@@ -8,7 +9,10 @@ const editButton = document.querySelector('.edit-button'),
     cardsContainer = document.querySelector('.elements__group'),
     addButton = document.querySelector('.add-button'),
     popupAdd = document.querySelector('.popup_type_add'),
-    closePopupAdd = document.querySelector('.popup__close-button_type_add');
+    closePopupAdd = document.querySelector('.popup__close-button_type_add'),
+    inputTitle = document.querySelector('.popup__input_type_title'),
+    inputLink = document.querySelector('.popup__input_type_link'),
+    formAdd = document.querySelector('.popup__container_type_add');
 
 const initialCards = [
     {
@@ -51,7 +55,7 @@ initialCards.forEach(function(item){
     cardsContainer.append(card);
 })
 
-function editProfile () {
+function openPopupEdit () {
     popupEdit.classList.add('popup_opened');
     inputName.value = name.textContent;
     inputDescription.value = description.textContent;
@@ -61,14 +65,14 @@ function closeEdit () {
     popupEdit.classList.remove('popup_opened');
 }
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
+function formEditSubmitHandler (evt) {
+    evt.preventDefault();   
     name.textContent = inputName.value;
     description.textContent = inputDescription.value;
-    close();
+    closeEdit();
 }
 
-function addPhoto () {
+function openPopupAdd () {
     popupAdd.classList.add('popup_opened');
 }
 
@@ -76,16 +80,29 @@ function closeAdd () {
     popupAdd.classList.remove('popup_opened');
 }
 
+function formAddSubmitHandler (evt) {
+    evt.preventDefault();   
+    const cardTemplate = document.querySelector('#card-template').content,
+        card = cardTemplate.querySelector('.element').cloneNode(true),
+        cardName = card.querySelector('.element__title'),
+        cardImage = card.querySelector('.element__image');
+
+    cardName.textContent = inputTitle.value;
+    cardImage.setAttribute('src', inputLink.value);
+    cardsContainer.prepend(card);
+    closeAdd();
+}
 
 
-editButton.addEventListener('click', editProfile);
 
-popupEdit.addEventListener('submit', formSubmitHandler);
+editButton.addEventListener('click', openPopupEdit);
+
+formEdit.addEventListener('submit', formEditSubmitHandler);
 
 closePopupEdit.addEventListener('click', closeEdit);
 
-addButton.addEventListener('click', addPhoto);
+addButton.addEventListener('click', openPopupAdd);
+
+formAdd.addEventListener('submit', formAddSubmitHandler);
 
 closePopupAdd.addEventListener('click', closeAdd);
-
-
