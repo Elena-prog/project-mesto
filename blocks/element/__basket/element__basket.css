@@ -1,0 +1,17 @@
+.element__basket {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    width: 18px;
+    height: 19px;
+    background-image: url(../../../images/wastebasket.svg);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+}
+
+.element__basket:hover {
+    opacity: .6;
+    cursor: pointer;
+}

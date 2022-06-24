@@ -43,26 +43,16 @@ const editButton = document.querySelector('.edit-button'),
 
 
 initialCards.forEach(function(item){
-    const cardTemplate = document.querySelector('#card-template').content,
-        card = cardTemplate.querySelector('.element').cloneNode(true),
-        cardName = card.querySelector('.element__title'),
-        cardImage = card.querySelector('.element__image'),
-        likeButton = card.querySelector('.heart');
-
-    cardName.textContent = item.name;
-    cardImage.setAttribute('src', item.link);
-    cardsContainer.append(card);
-    likeButton.addEventListener('click', like);
+    let cardObj = createCard();
+    cardObj.cardName.textContent = item.name;
+    cardObj.cardImage.setAttribute('src', item.link);
+    cardsContainer.append(cardObj.card);
 })
 
 function openPopupEdit () {
     popupEdit.classList.add('popup_opened');
     inputName.value = name.textContent;
     inputDescription.value = description.textContent;
-}
-
-function closeEdit () {
-    popupEdit.classList.remove('popup_opened');
 }
 
 function formEditSubmitHandler (evt) {
@@ -72,29 +62,44 @@ function formEditSubmitHandler (evt) {
     closeEdit();
 }
 
+function closeEdit () {
+    popupEdit.classList.remove('popup_opened');
+}
+
 function openPopupAdd () {
     popupAdd.classList.add('popup_opened');
     inputTitle.value = '';
     inputLink.value = '';
 }
 
+function formAddSubmitHandler (evt) {
+    evt.preventDefault();
+    let cardObj = createCard();  
+        cardObj.cardName.textContent = inputTitle.value;
+        cardObj.cardImage.setAttribute('src', inputLink.value);
+
+    cardsContainer.prepend(cardObj.card);
+    closeAdd();
+}
+
 function closeAdd () {
     popupAdd.classList.remove('popup_opened');
 }
 
-function formAddSubmitHandler (evt) {
-    evt.preventDefault();   
+function createCard () {
     const cardTemplate = document.querySelector('#card-template').content,
         card = cardTemplate.querySelector('.element').cloneNode(true),
         cardName = card.querySelector('.element__title'),
         cardImage = card.querySelector('.element__image'),
-        likeButton = card.querySelector('.heart');
+        likeButton = card.querySelector('.heart'),
+        deleteButton = card.querySelector('.element__basket');
 
-    cardName.textContent = inputTitle.value;
-    cardImage.setAttribute('src', inputLink.value);
-    cardsContainer.prepend(card);
-    closeAdd();
     likeButton.addEventListener('click', like);
+    deleteButton.addEventListener('click', function() {
+        card.remove();
+    })
+
+    return {'card': card, 'cardName': cardName, 'cardImage': cardImage};
 }
 
 function like (evt) {
