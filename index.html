@@ -51,10 +51,17 @@
                 <button type="submit" class="popup__submit-button">Создать</button>
             </form>
         </div>
+        <div class="popup popup_overlay_dark popup_type_img">
+            <div class="popup__image-container">
+                <button type="button" class="popup__close-button popup__close-button_type_img" aria-label="кнопка закрыть."></button>
+                <img src="#" alt="" class="popup__image">
+                <p class="popup__subtitle"></p>
+            </div>
+        </div>
      </div>
      <template id="card-template">
         <li class="element">
-            <button class="element__basket" aria-label="корзина."></button>
+            <button class="element__button-delete" aria-label="корзина."></button>
             <div class="element__container-image">
                  <img src="#" alt="" class="element__image"/>
              </div>

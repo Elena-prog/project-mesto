@@ -39,7 +39,11 @@ const editButton = document.querySelector('.edit-button'),
     closePopupAdd = document.querySelector('.popup__close-button_type_add'),
     inputTitle = document.querySelector('.popup__input_type_title'),
     inputLink = document.querySelector('.popup__input_type_link'),
-    formAdd = document.querySelector('.popup__container_type_add');
+    formAdd = document.querySelector('.popup__container_type_add'),
+    popupImage = document.querySelector('.popup_type_img');
+    fullImage = document.querySelector('.popup__image'),
+    closePopupImage = document.querySelector('.popup__close-button_type_img'),
+    popupSubtitle = document.querySelector('.popup__subtitle');
 
 
 initialCards.forEach(function(item){
@@ -47,6 +51,8 @@ initialCards.forEach(function(item){
     cardObj.cardName.textContent = item.name;
     cardObj.cardImage.setAttribute('src', item.link);
     cardsContainer.append(cardObj.card);
+
+    openImage(cardObj.cardImage, item.link, item.name);
 })
 
 function openPopupEdit () {
@@ -79,6 +85,9 @@ function formAddSubmitHandler (evt) {
         cardObj.cardImage.setAttribute('src', inputLink.value);
 
     cardsContainer.prepend(cardObj.card);
+
+    openImage(cardObj.cardImage, inputLink.value, inputTitle.value);
+
     closeAdd();
 }
 
@@ -92,7 +101,7 @@ function createCard () {
         cardName = card.querySelector('.element__title'),
         cardImage = card.querySelector('.element__image'),
         likeButton = card.querySelector('.heart'),
-        deleteButton = card.querySelector('.element__basket');
+        deleteButton = card.querySelector('.element__button-delete');
 
     likeButton.addEventListener('click', like);
     deleteButton.addEventListener('click', function() {
@@ -104,6 +113,17 @@ function createCard () {
 
 function like (evt) {
     evt.target.classList.toggle('heart_active');
+}
+
+function openImage (image, link, name) {
+    image.addEventListener('click', function(){
+        popupImage.classList.add('popup_opened');
+        fullImage.setAttribute('src', link);
+        popupSubtitle.textContent = name;
+        closePopupImage.addEventListener('click', function() {
+            popupImage.classList.remove('popup_opened');
+        })
+    })
 }
 
 editButton.addEventListener('click', openPopupEdit);

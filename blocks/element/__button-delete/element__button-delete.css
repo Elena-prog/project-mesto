@@ -1,4 +1,4 @@
-.element__basket {
+.element__button-delete {
     border: 0;
     padding: 0;
     background-color: transparent;
@@ -8,10 +8,9 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 200;
 }
 
-.element__basket:hover {
+.element__button-delete:hover {
     opacity: .6;
     cursor: pointer;
 }
