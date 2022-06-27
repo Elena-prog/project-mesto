@@ -65,11 +65,7 @@ function formEditSubmitHandler (evt) {
     evt.preventDefault();   
     name.textContent = inputName.value;
     description.textContent = inputDescription.value;
-    closeEdit();
-}
-
-function closeEdit () {
-    popupEdit.classList.remove('popup_opened');
+    closePopup(popupEdit);
 }
 
 function openPopupAdd () {
@@ -88,11 +84,7 @@ function formAddSubmitHandler (evt) {
 
     openImage(cardObj.cardImage, inputLink.value, inputTitle.value);
 
-    closeAdd();
-}
-
-function closeAdd () {
-    popupAdd.classList.remove('popup_opened');
+    closePopup(popupAdd);
 }
 
 function createCard () {
@@ -120,20 +112,22 @@ function openImage (image, link, name) {
         popupImage.classList.add('popup_opened');
         fullImage.setAttribute('src', link);
         popupSubtitle.textContent = name;
-        closePopupImage.addEventListener('click', function() {
-            popupImage.classList.remove('popup_opened');
-        })
+        closePopupImage.addEventListener('click', function() {closePopup(popupImage)})
     })
+}
+
+function closePopup (popup) {
+    popup.classList.remove('popup_opened');
 }
 
 editButton.addEventListener('click', openPopupEdit);
 
 formEdit.addEventListener('submit', formEditSubmitHandler);
 
-closePopupEdit.addEventListener('click', closeEdit);
+closePopupEdit.addEventListener('click', function() {closePopup(popupEdit)});
 
 addButton.addEventListener('click', openPopupAdd);
 
 formAdd.addEventListener('submit', formAddSubmitHandler);
 
-closePopupAdd.addEventListener('click', closeAdd);
+closePopupAdd.addEventListener('click', function() {closePopup(popupAdd)});
