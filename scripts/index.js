@@ -19,16 +19,16 @@ const editButton = document.querySelector('.edit-button'),
     popupSubtitle = document.querySelector('.popup__subtitle'),
     cardTemplate = document.querySelector('#card-template').content;
 
-function renderCard (name, link) {
-    const card = createCard(name, link);
-    cardsContainer.prepend(card);
+function renderCard (cardData, container) {
+    const card = createCard(cardData);
+    container.prepend(card);
 }
 
-function openImage (name, link) {
+function openImage (cardData) {
+    fullImage.setAttribute('src', cardData.link);
+    fullImage.setAttribute('alt', cardData.name);
+    popupSubtitle.textContent = cardData.name;
     openPopup(popupImage);
-    fullImage.setAttribute('src', link);
-    fullImage.setAttribute('alt', name);
-    popupSubtitle.textContent = name;
 }
 
 function handleLikeClick (evt) {
@@ -39,18 +39,18 @@ function handelDeleteCard (evt) {
     evt.target.closest('.element').remove();
 }
 
-function createCard (name, link) {
+function createCard (cardData) {
     const card = cardTemplate.querySelector('.element').cloneNode(true),
         cardName = card.querySelector('.element__title'),
         cardImage = card.querySelector('.element__image'),
         likeButton = card.querySelector('.heart'),
         deleteButton = card.querySelector('.element__button-delete');
 
-    cardName.textContent = name;
-    cardImage.setAttribute('src', link);
-    cardImage.setAttribute('alt', name);
+    cardName.textContent = cardData.name;
+    cardImage.setAttribute('src', cardData.link);
+    cardImage.setAttribute('alt', cardData.name);
 
-    cardImage.addEventListener('click', function() {openImage(name, link)});
+    cardImage.addEventListener('click', function() {openImage(cardData)});
     likeButton.addEventListener('click', handleLikeClick);
     deleteButton.addEventListener('click', handelDeleteCard);
 
@@ -58,7 +58,7 @@ function createCard (name, link) {
 }
 
 initialCards.forEach(function(item){
-    renderCard(item.name, item.link);
+    renderCard(item, cardsContainer);
 })
 
 function openPopup (popup) {
@@ -84,7 +84,8 @@ function formEditSubmitHandler (evt) {
 
 function formAddSubmitHandler (evt) {
     evt.preventDefault();
-    renderCard(inputTitle.value, inputLink.value)
+    const cardObj = {'name': inputTitle.value, 'link':inputLink.value};
+    renderCard(cardObj, cardsContainer);
     closePopup(popupAdd);
     formAdd.reset();
 }
