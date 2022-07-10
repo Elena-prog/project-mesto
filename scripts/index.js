@@ -19,6 +19,8 @@ const editButton = document.querySelector('.edit-button'),
     popupSubtitle = document.querySelector('.popup__subtitle'),
     cardTemplate = document.querySelector('#card-template').content;
 
+
+
 function renderCard (cardData, container) {
     const card = createCard(cardData);
     container.prepend(card);
@@ -73,6 +75,7 @@ function openPopupEdit () {
     openPopup(popupEdit);
     inputName.value = name.textContent;
     inputDescription.value = description.textContent;
+    validateForm(formEdit);
 }
 
 function formEditSubmitHandler (evt) {
@@ -90,15 +93,51 @@ function formAddSubmitHandler (evt) {
     formAdd.reset();
 }
 
+function formInputHandler(evt) {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+    const input = evt.target;
+
+    // validateForm(form);
+    validateInput(input);
+
+}
+
+function validateForm (form) {
+    const submitButton = form.querySelector('.popup__submit-button');
+
+    if(form.checkValidity()) {
+        submitButton.classList.add('popup__submit-button_valid');
+        submitButton.classList.remove('popup__submit-button_invalid');
+        submitButton.removeAttribute('desibled');
+    } else {
+        submitButton.classList.add('popup__submit-button_invalid');
+        submitButton.classList.remove('popup__submit-button_valid');
+        submitButton.setAttribute('desibled', true);
+    }
+}
+
+
+function validateInput(input) {
+    const error = input.closest('.popup__container').querySelector(`#${input.id}-error`);
+    error.textContent = input.validationMessage;
+
+}
+
+
 editButton.addEventListener('click', openPopupEdit);
 
 formEdit.addEventListener('submit', formEditSubmitHandler);
+
+formEdit.addEventListener('input', formInputHandler);
 
 closePopupEdit.addEventListener('click', function() {closePopup(popupEdit)});
 
 addButton.addEventListener('click', function() {openPopup(popupAdd)});
 
 formAdd.addEventListener('submit', formAddSubmitHandler);
+
+formAdd.addEventListener('input', formInputHandler);
 
 closePopupAdd.addEventListener('click', function() {closePopup(popupAdd)});
 
