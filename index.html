@@ -41,18 +41,18 @@
                 <span id="name-error" class="popup__input-error"></span>
                 <input id="description"  type="text" class="popup__input popup__input_type_description" required placeholder="Род деятельности" minlength="2" maxlength="200">
                 <span id="description-error" class="popup__input-error"></span>
-                <button type="submit" class="popup__submit-button popup__submit-button_valid">Сохранить</button>
+                <button type="submit" class="popup__submit-button">Сохранить</button>
             </form>
         </div>
         <div class="popup popup_type_add">
             <form action="#" class="popup__container popup__container_type_add" novalidate>
                 <button type="button" class="popup__close-button popup__close-button_type_add" aria-label="кнопка закрыть."></button>
                 <h3 class="popup__title">Новое место</h3>
-                <input  id="title" type="text" class="popup__input popup__input_type_title" required placeholder="Название">
+                <input  id="title" type="text" class="popup__input popup__input_type_title" required placeholder="Название" minlength="2" maxlength="30">
                 <span id="title-error" class="popup__input-error"></span>
                 <input id="link" type="url" class="popup__input popup__input_type_link" required placeholder="Ссылка на картинку">
                 <span id="link-error" class="popup__input-error"></span>
-                <button type="submit" class="popup__submit-button popup__submit-button_valid">Создать</button>
+                <button disabled type="submit" class="popup__submit-button popup__submit-button_invalid">Создать</button>
             </form>
         </div>
         <div class="popup popup_overlay_dark popup_type_img">

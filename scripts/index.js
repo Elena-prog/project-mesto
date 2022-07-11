@@ -91,6 +91,7 @@ function formAddSubmitHandler (evt) {
     renderCard(cardObj, cardsContainer);
     closePopup(popupAdd);
     formAdd.reset();
+    validateForm(formAdd);
 }
 
 function formInputHandler(evt) {
@@ -98,27 +99,31 @@ function formInputHandler(evt) {
     const form = evt.currentTarget;
     const input = evt.target;
 
-    // validateForm(form);
+   
     validateInput(input);
-
+    validateForm(form);
 }
 
 function validateForm (form) {
     const submitButton = form.querySelector('.popup__submit-button');
 
     if(form.checkValidity()) {
-        submitButton.classList.add('popup__submit-button_valid');
         submitButton.classList.remove('popup__submit-button_invalid');
-        submitButton.removeAttribute('desibled');
+        submitButton.removeAttribute('disabled');
     } else {
         submitButton.classList.add('popup__submit-button_invalid');
-        submitButton.classList.remove('popup__submit-button_valid');
-        submitButton.setAttribute('desibled', true);
+        submitButton.setAttribute('disabled', true);
     }
 }
 
 
 function validateInput(input) {
+    if(input.validity.valid) {
+        input.classList.remove('popup__input_invalid');
+    } else {
+        input.classList.add('popup__input_invalid');
+    }
+
     const error = input.closest('.popup__container').querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
 
