@@ -17,8 +17,21 @@ const editButton = document.querySelector('.edit-button'),
     fullImage = document.querySelector('.popup__image'),
     closePopupImage = document.querySelector('.popup__close-button_type_img'),
     popupSubtitle = document.querySelector('.popup__subtitle'),
-    cardTemplate = document.querySelector('#card-template').content;
+    cardTemplate = document.querySelector('#card-template').content,
+    popup = document.querySelectorAll('.popup'),
+    form = document.querySelectorAll('.popup__container');
 
+Array.from(popup).forEach((popupElement) => {
+    popupElement.addEventListener('click', (evt) => {
+        closePopup(popupElement);
+    })
+})
+
+Array.from(form).forEach((formElement) => {
+    formElement.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+    })
+})
 
 
 function renderCard (cardData, container) {
