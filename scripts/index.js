@@ -18,18 +18,13 @@ const editButton = document.querySelector('.edit-button'),
     closePopupImage = document.querySelector('.popup__close-button_type_img'),
     popupSubtitle = document.querySelector('.popup__subtitle'),
     cardTemplate = document.querySelector('#card-template').content,
-    popup = document.querySelectorAll('.popup'),
-    form = document.querySelectorAll('.popup__container');
+    popup = document.querySelectorAll('.popup');
 
-Array.from(popup).forEach((popupElement) => {
+popup.forEach((popupElement) => {
     popupElement.addEventListener('click', (evt) => {
-        closePopup(popupElement);
-    })
-})
-
-Array.from(form).forEach((formElement) => {
-    formElement.addEventListener('click', (evt) => {
-        evt.stopPropagation();
+        if(evt.target === evt.currentTarget) {
+            closePopup(popupElement);
+        }
     })
 })
 
