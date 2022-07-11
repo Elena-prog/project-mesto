@@ -20,14 +20,6 @@ const editButton = document.querySelector('.edit-button'),
     cardTemplate = document.querySelector('#card-template').content,
     popup = document.querySelectorAll('.popup');
 
-popup.forEach((popupElement) => {
-    popupElement.addEventListener('click', (evt) => {
-        if(evt.target === evt.currentTarget) {
-            closePopup(popupElement);
-        }
-    })
-})
-
 
 function renderCard (cardData, container) {
     const card = createCard(cardData);
@@ -103,13 +95,12 @@ function formAddSubmitHandler (evt) {
 }
 
 function formInputHandler(evt) {
-    evt.preventDefault();
+    // evt.preventDefault();
     const form = evt.currentTarget;
     const input = evt.target;
 
-   
-    validateInput(input);
     validateForm(form);
+    validateInput(input);
 }
 
 function validateForm (form) {
@@ -136,6 +127,21 @@ function validateInput(input) {
     error.textContent = input.validationMessage;
 
 }
+
+popup.forEach((popupElement) => {
+    popupElement.addEventListener('click', (evt) => {
+        if(evt.target === evt.currentTarget) {
+            console.log('click');
+            closePopup(popupElement);
+        }
+    })
+    document.body.addEventListener('keydown', (evt) => {
+        if(evt.key === 'Escape') {
+            console.log('esc');
+            closePopup(popupElement);
+        }
+    })
+})
 
 
 editButton.addEventListener('click', openPopupEdit);
