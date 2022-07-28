@@ -1,3 +1,16 @@
+import {Card, popupImage} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+import {initialCards} from './cards.js';
+
+const parameters = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_invalid',
+    inputErrorClass: 'popup__input_invalid',
+    errorClass: 'popup__input-error_visible'
+};  
+
 const buttonEdit = document.querySelector('.edit-button'),
     popupEdit = document.querySelector('.popup_type_edit'),
     formEdit = document.querySelector('.popup__container_type_edit'),
@@ -13,64 +26,14 @@ const buttonEdit = document.querySelector('.edit-button'),
     inputTitle = document.querySelector('.popup__input_type_title'),
     inputLink = document.querySelector('.popup__input_type_link'),
     formAdd = document.querySelector('.popup__container_type_add'),
-    popupImage = document.querySelector('.popup_type_img');
-    fullImage = document.querySelector('.popup__image'),
     buttonClosePopupImage = document.querySelector('.popup__close-button_type_img'),
-    popupSubtitle = document.querySelector('.popup__subtitle'),
     cardTemplate = document.querySelector('#card-template').content,
     popupList = document.querySelectorAll('.popup');
-class Card {
-    constructor(data, templateSelector) {
-        this._name = data.name;
-        this._link = data.link;
-        this._templateSelector = templateSelector;
-    }
-
-    renderCard(container) {
-        const card = this._createCard();
-        container.prepend(card);
-    }
-
-    _openImage() {
-        fullImage.setAttribute('src', this._link);
-        fullImage.setAttribute('alt', this._name);
-        popupSubtitle.textContent = this._name;
-        openPopup(popupImage);
-    }
-    
-    _handleLikeClick (evt) {
-        evt.target.classList.toggle('heart_active');
-    }
-    
-    _handelDeleteCard (evt) {
-        evt.target.closest('.element').remove();
-    }
-    
-    _createCard () {
-        const card = this._templateSelector.querySelector('.element').cloneNode(true),
-            cardName = card.querySelector('.element__title'),
-            cardImage = card.querySelector('.element__image'),
-            buttonLike = card.querySelector('.heart'),
-            buttonDelete = card.querySelector('.element__button-delete');
-    
-        cardName.textContent = this._name;
-        cardImage.setAttribute('src', this._link);
-        cardImage.setAttribute('alt', this._name);
-    
-        cardImage.addEventListener('click', () => {this._openImage()});
-        buttonLike.addEventListener('click', this._handleLikeClick);
-        buttonDelete.addEventListener('click', this._handelDeleteCard);
-        
-        return card;
-    }
-
-}
 
 initialCards.forEach(function(item) {
-    const card = new Card(item, cardTemplate);
+    const card = new Card(item, cardTemplate, openPopup);
     card.renderCard(cardsContainer);
 })
-
 
 function closeByEsc(evt) {
     if (evt.key === 'Escape') {
@@ -107,10 +70,9 @@ function formEditSubmitHandler(evt) {
 
 function formAddSubmitHandler(evt) {
     evt.preventDefault();
-    // this._name = inputTitle.value;
-    // this._link = inputLink.value;
+    
     const cardObj = {'name': inputTitle.value, 'link':inputLink.value};
-    const card = new Card(cardObj, cardTemplate);
+    const card = new Card(cardObj, cardTemplate, openPopup);
     card.renderCard(cardsContainer);
     closePopup(popupAdd);
     formAdd.reset();
@@ -138,5 +100,13 @@ buttonAdd.addEventListener('click', () => {openPopup(popupAdd)});
 formAdd.addEventListener('submit', formAddSubmitHandler);
 buttonClosePopupAdd.addEventListener('click', () => {closePopup(popupAdd)});
 buttonClosePopupImage.addEventListener('click', () => {closePopup(popupImage)});
+
+const formList = Array.from(document.querySelectorAll(parameters.formSelector));
+
+formList.forEach((formElement) => {
+    const formValiator = new FormValidator(parameters, formElement);
+    formValiator.enableValidation();
+})
+
 
 
